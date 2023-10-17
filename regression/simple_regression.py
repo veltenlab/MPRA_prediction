@@ -50,7 +50,6 @@ input_path_train = "/home/felix/cluster/fpacheco/Data/Nadav_lab/K562/mean_with_s
 input_path_test = '/home/felix/cluster/fpacheco/Data/Nadav_lab/K562/mean_with_sequence_ENCFF616IAQ_test.csv'
 input_path_valid = '/home/felix/cluster/fpacheco/Data/Nadav_lab/K562/mean_with_sequence_ENCFF616IAQ_validation.csv'
 
-
 # Get first item of the dataset to get the shape of the input data
 for element in data_reader(input_path_train):
     input_shape = element[0].shape
