@@ -10,6 +10,7 @@ write.csv(libA, "output.csv", row.names=FALSE, quote=FALSE)
 
 
 predictions.felix <- read.csv("/home/felix/cluster/fpacheco/Data/Robert_data/processed_data/10fold_cv/LibA_wide_pivot_state3_test_predicted_cv10fold_ensemble.csv")
+predictions.felix <- 
 predictions.felix <- ddply(predictions.felix, c("fold"), transform, predictions.std = scale(average_pred))
 hist(predictions.felix$predictions.std)
 
