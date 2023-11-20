@@ -3,14 +3,16 @@ require(ggplot2)
 require(ggrepel)
 require(glmnet)
 require(randomForest)
-require
 source("~/cluster/project/SCG4SYN/read_in_data.R")
 read_in_data("~/cluster/project/SCG4SYN/")
-write.csv(libA, "output.csv", row.names=FALSE, quote=FALSE) 
+
+libA <- DATA$HSPC.libA.BS1$narrow
+colnames(libA)[15] <- "seq"
+colnames(libA)[27] <- "mean.scaled"
 
 
 predictions.felix <- read.csv("/home/felix/cluster/fpacheco/Data/Robert_data/processed_data/10fold_cv/LibA_wide_pivot_state3_test_predicted_cv10fold_ensemble.csv")
-predictions.felix <- 
+predictions.felix$average_pred <- rowMeans(predictions.felix[,c(4:12)])
 predictions.felix <- ddply(predictions.felix, c("fold"), transform, predictions.std = scale(average_pred))
 hist(predictions.felix$predictions.std)
 
@@ -22,7 +24,7 @@ state3e <- ddply(state3e, c("fold"), transform, y.std = scale(mean.scaled))
 
 # Random forest
 rf <- readRDS("~/cluster/lvelten/Analysis/SCG4SYN/LibA_HSC/analysis/complete_run_simple_bio_analyses/007_predictions_RF.rds") 
-qplot(x = norm.combined, y = predicted, data= rf)
+qplot(x = norm.combined, y = predicted, data= rf) + theme_classic()
 
 # Deep Learning model
 load("~/cluster/lvelten/Analysis/SCG4SYN/LibA_HSC/analysis/complete_run_simple_bio_analyses/007_R2_RF_byTF.rda")
@@ -31,7 +33,7 @@ qplot(x = mean.scaled, y = average_pred, data = state3e, color = factor(fold))
  # Calculate technical R**2
 correlations <- state3e %>%
   group_by(TF) %>%
-  summarize(correlation = cor(norm.1, norm.2)^2)
+  summarize(correlation = cor(norm.1.adj, norm.2.adj)^2)
 
 # Calculate correlation between predicted value and true value
 R2_deep <- ddply(state3e , c("TF", "fold"), summarise, R2_deep_fold = cor(y.std, predictions.std)^2)
