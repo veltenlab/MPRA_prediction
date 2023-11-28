@@ -1,4 +1,4 @@
-# This script reads Library A data and makes different dataframes according to the modeling needs
+# This script reads Library A data and makes different dataframes according to the modeling needs (with background, without, etc)
 
 # Import libraries and data
 library(tidyr)
