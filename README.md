@@ -44,4 +44,7 @@ Computes contribution scores for background samples.
 - **`evaluate_regression_background.ipynb`** :\
 Compares a random forest predictor vs the cv_simple_model_regression_ensemble_background.ipynb predictions
 
+## Prediction
+
+To predict new sequences one can use the script regression/forward_pass.ipynb (Can predict for multihead or simple regression)
 
