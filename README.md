@@ -26,3 +26,6 @@ Reads in the weights of the trained model and creates a simple server which wait
 - **`query_model_client.R`** :\
 Once the model server is running, you can use this function to query it from R.
 
+## Sequence design
+
+See subfolder `sequence_design` for automated design of sequences with cell state specific activity patterns
